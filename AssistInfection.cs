@@ -32,7 +32,7 @@ namespace ArithFeather.AssistInfection
 	{
 		[ConfigOption] private readonly bool disablePlugin = false;
 		[ConfigOption] private readonly bool displayTimer = true;
-		[ConfigOption] private readonly string timerFormat = "<size=60>Corpse infected for <color=#44444>{0}</color> seconds.</size>";
+		[ConfigOption] private readonly string timerFormat = "<size=50>{0} can be resurrected for <color=#44444>{1}</color> more seconds.</size>";
 
 		public override void Register()
 		{
@@ -120,7 +120,7 @@ namespace ArithFeather.AssistInfection
 
 					if (showTime && zboy.InfectionTimer >= 0)
 					{
-						PersonalBroadcast(zboy.Killer, 1, string.Format(timerFormat, (int)zboy.InfectionTimer));
+						PersonalBroadcast(zboy.Killer, 1, string.Format(timerFormat, zboy.Player.Name, (int)zboy.InfectionTimer));
 					}
 
 					var go = (zboy.Killer.GetGameObject() as GameObject);
