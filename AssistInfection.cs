@@ -70,7 +70,11 @@ namespace ArithFeather.AssistInfection
 
 		public void OnWaitingForPlayers(WaitingForPlayersEvent ev)
 		{
-			if (disablePlugin) return;
+			if (disablePlugin)
+			{
+				PluginManager.DisablePlugin(this);
+				return;
+			}
 
 			cachedBroadcast = GameObject.Find("Host").GetComponent<Broadcast>();
 			InfectedPlayers.Clear();
@@ -85,7 +89,7 @@ namespace ArithFeather.AssistInfection
 		/// </summary>
 		public void OnUpdate(UpdateEvent ev)
 		{
-			if (!isAPlayerDead || disablePlugin) return;
+			if (!isAPlayerDead) return;
 
 			var deltaTime = Time.deltaTime;
 			var showTime = false;
@@ -151,7 +155,7 @@ namespace ArithFeather.AssistInfection
 		/// <param name="ev"></param>
 		public void OnSetRole(PlayerSetRoleEvent ev)
 		{
-			if (!isAPlayerDead || disablePlugin || ev.Role == Role.SPECTATOR) return;
+			if (!isAPlayerDead || ev.Role == Role.SPECTATOR) return;
 
 			for (int i = InfectedPlayers.Count - 1; i >= 0; i--)
 			{
@@ -175,8 +179,6 @@ namespace ArithFeather.AssistInfection
 		/// <param name="ev"></param>
 		public void OnPlayerInfected(PlayerInfectedEvent ev)
 		{
-			if (disablePlugin) return;
-
 			var scp = ev.Attacker;
 
 			if (isAPlayerDead)
@@ -219,8 +221,6 @@ namespace ArithFeather.AssistInfection
 
 		public void OnRecallZombie(PlayerRecallZombieEvent ev)
 		{
-			if (disablePlugin) return;
-
 			for (var i = InfectedPlayers.Count - 1; i >= 0; i--)
 			{
 				var infected = infectedPlayers[i];
