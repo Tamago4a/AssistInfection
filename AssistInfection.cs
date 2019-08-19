@@ -23,7 +23,7 @@ namespace ArithFeather.AssistInfection
 		description = "Delays your spawn if there's a chance for SCP049 to turn you into a zombie.",
 		id = "ArithFeather.AssistInfection",
 		configPrefix = "afai",
-		version = "1.0",
+		version = "1.1",
 		SmodMajor = 3,
 		SmodMinor = 4,
 		SmodRevision = 0
@@ -34,10 +34,7 @@ namespace ArithFeather.AssistInfection
 		[ConfigOption] private readonly bool displayTimer = true;
 		[ConfigOption] private readonly string timerFormat = "<size=50>{0} can be resurrected for <color=#44444>{1}</color> more seconds.</size>";
 
-		public override void Register()
-		{
-			AddEventHandlers(this);
-		}
+		public override void Register() =>AddEventHandlers(this);
 		public override void OnEnable() => Info("Zombie Spawn Delay Enabled");
 		public override void OnDisable() => Info("Zombie Spawn Delay Disabled");
 
@@ -106,20 +103,11 @@ namespace ArithFeather.AssistInfection
 
 			for (var i = InfectedPlayers.Count - 1; i >= 0; i--)
 			{
-				var zboy = InfectedPlayers[i];
-				var player = zboy.Player;
-
-				if (player == null || zboy.Killer == null)
+				try
 				{
-					InfectedPlayers.RemoveAt(i);
+					var zboy = InfectedPlayers[i];
+					var player = zboy.Player;
 
-					if (InfectedPlayers.Count == 0)
-					{
-						isAPlayerDead = false;
-					}
-				}
-				else
-				{
 					zboy.InfectionTimer -= deltaTime;
 
 					if (showTime && zboy.InfectionTimer >= 0)
@@ -144,6 +132,15 @@ namespace ArithFeather.AssistInfection
 						{
 							zboy.Player.ChangeRole(zboy.SavedRole);
 						}
+					}
+				}
+				catch // Catch disconnected players
+				{
+					InfectedPlayers.RemoveAt(i);
+
+					if (InfectedPlayers.Count == 0)
+					{
+						isAPlayerDead = false;
 					}
 				}
 			}
