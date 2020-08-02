@@ -1,8 +1,11 @@
 ﻿using Exiled.API.Interfaces;
 
 namespace ArithFeather.AssistInfection {
-	public class Config : IConfig{
+	public class Config : IConfig {
+		public const int DeadPlayerCacheSize = 30;
+
 		public bool IsEnabled { get; set; } = true;
+
 		public bool DisplayTimer { get; set; } = true;
 
 		public string TimerFormat { get; set; } =
