@@ -10,7 +10,7 @@ namespace ArithFeather.AssistInfection {
 		public void Initialize(Player player, Player killer, AssistInfection plugin) {
 			_player = player;
 			_killer = killer;
-			_infectionTimer = Scp049.TimeToRevive + 2;
+			_infectionTimer = Scp049.ReviveEligibilityDuration;
 			_plugin = plugin;
 
 			Coroutine = RunCoroutine(StartCountdown());
