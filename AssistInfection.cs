@@ -20,7 +20,6 @@ namespace ArithFeather.AssistInfection {
 		public override void OnEnabled() {
 			base.OnEnabled();
 
-			ArithFeather.AriToolKit.CustomEnding.Instance.EnablePatch();
 			Exiled.Events.Handlers.Server.RoundEnded += Server_RoundEnded;
 			Exiled.Events.Handlers.Player.Died += Player_Died;
 			Exiled.Events.Handlers.Scp049.FinishingRecall += Scp049_FinishingRecall;
