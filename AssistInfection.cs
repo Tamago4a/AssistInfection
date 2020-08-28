@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using Exiled.API.Features;
 using MEC;
@@ -17,8 +18,12 @@ namespace ArithFeather.AssistInfection {
 		public override string Author => "Arith";
 		public override Version Version => new Version("2.01");
 
+		public CultureInfo CachedCultureInfo { get; private set; }
+
 		public override void OnEnabled() {
 			base.OnEnabled();
+
+			CachedCultureInfo = CultureInfo.GetCultureInfo(Config.LanguageCultureInfo);
 
 			Exiled.Events.Handlers.Server.RoundEnded += Server_RoundEnded;
 			Exiled.Events.Handlers.Player.Died += Player_Died;

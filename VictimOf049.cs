@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using Exiled.API.Features;
+using Exiled.Events.Commands.Reload;
 using MEC;
 using PlayableScps;
 using static MEC.Timing;
@@ -38,7 +40,7 @@ namespace ArithFeather.AssistInfection {
 				{
 					_killer.ClearBroadcasts();
 					_killer.Broadcast(1,
-						string.Format(_plugin.Config.TimerFormat, _player.Nickname, (int) _infectionTimer));
+						string.Format(_plugin.Config.TimerFormat, _player.Nickname, ((int) _infectionTimer)).ToString(_plugin.CachedCultureInfo));
 				}
 
 				yield return WaitForSeconds(1);
