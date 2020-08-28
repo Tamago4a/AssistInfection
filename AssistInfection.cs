@@ -16,7 +16,7 @@ namespace ArithFeather.AssistInfection {
 			new Dictionary<byte, VictimOf049>(Config.DeadPlayerCacheSize);
 
 		public override string Author => "Arith";
-		public override Version Version => new Version("2.01");
+		public override Version Version => new Version("2.02");
 
 		public CultureInfo CachedCultureInfo { get; private set; }
 

@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using Exiled.API.Features;
-using Exiled.Events.Commands.Reload;
 using MEC;
 using PlayableScps;
 using static MEC.Timing;
 
-namespace ArithFeather.AssistInfection {
+namespace ArithFeather.AssistInfection
+{
 	public class VictimOf049 {
 
 		public void Initialize(Player player, Player killer, AssistInfection plugin) {
